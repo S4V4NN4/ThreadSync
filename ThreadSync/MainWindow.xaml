@@ -1,0 +1,63 @@
+﻿<Window x:Class="ReadersWriters.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Readers-Writers Synchronization" Height="600" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Верхняя панель -->
+            <RowDefinition Height="Auto"/>
+            <!-- Поля переменной и очереди -->
+            <RowDefinition Height="*"/>
+            <!-- Основное поле с потоками -->
+        </Grid.RowDefinitions>
+
+        <!-- Панель ввода -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Читателей:" VerticalAlignment="Center" />
+            <TextBox x:Name="ReadersBox" Width="50" Margin="5,0"/>
+            <TextBlock Text="Писателей:" VerticalAlignment="Center" />
+            <TextBox x:Name="WritersBox" Width="50" Margin="5,0"/>
+            <TextBlock Text="Макс. читателей одновременно:" VerticalAlignment="Center" />
+            <TextBox x:Name="MaxReadersBox" Width="50" Margin="5,0"/>
+
+            <Button Content="Старт" Click="Start_Click" Margin="10,0"/>
+            <Button Content="Стоп" Click="Stop_Click" Margin="5,0"/>
+        </StackPanel>
+
+        <!-- Поле состояния переменной и очереди -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,0,0,10">
+            <TextBlock Text="Общая переменная:" FontWeight="Bold"/>
+            <TextBox x:Name="SharedValueBox" IsReadOnly="True" Text="0" 
+                     FontSize="16" HorizontalContentAlignment="Center" Margin="0,5,0,5"/>
+
+            <TextBlock Text="Очередь:" FontWeight="Bold"/>
+            <TextBox x:Name="QueueBox" IsReadOnly="True" Height="40" Text="-" 
+                     TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        </StackPanel>
+
+        <!-- Основная сетка с читателями и писателями -->
+        <Grid Grid.Row="2" x:Name="ThreadsGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="2">
+                <StackPanel>
+                    <TextBlock Text="Читатели" FontWeight="Bold" 
+                               HorizontalAlignment="Center" Margin="0,5"/>
+                    <ItemsControl x:Name="ReadersPanel"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="2">
+                <StackPanel>
+                    <TextBlock Text="Писатели" FontWeight="Bold" 
+                               HorizontalAlignment="Center" Margin="0,5"/>
+                    <ItemsControl x:Name="WritersPanel"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
